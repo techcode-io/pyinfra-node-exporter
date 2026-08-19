@@ -24,6 +24,10 @@ Managed with `uv`; a `poethepoet` task runner wraps the common commands (`pyproj
 - `uv run poe env:configure` — install pre-commit hooks (ruff-check, ruff-format, LF line endings,
   gitlint) for local development
 
+Always invoke tools through `uv run <tool>` (or the `poe` tasks above). Do not call
+`.venv/bin/<tool>` directly — `uv run` is what keeps the environment synced with `pyproject.toml`/
+`uv.lock` before running, so a stale `.venv` doesn't silently mask dependency changes.
+
 ## Architecture
 
 Source lives under `src/pyinfra_node_exporter/` (src layout, `uv_build` backend):

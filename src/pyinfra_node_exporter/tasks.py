@@ -1,4 +1,7 @@
 from importlib import resources
+from importlib.resources.abc import Traversable
+from types import MappingProxyType
+from typing import Final
 
 from pyinfra.api import deploy
 from pyinfra.context import host
@@ -6,27 +9,29 @@ from pyinfra.operations import files, server, systemd
 
 from pyinfra_node_exporter.facts import BINARY_PATH, NodeExporterVersion
 
-UNIT_PATH = "/etc/systemd/system/node_exporter.service"
-DOWNLOAD_DIR = "/tmp/node_exporter"
+UNIT_PATH: Final[str] = "/etc/systemd/system/node_exporter.service"
+DOWNLOAD_DIR: Final[str] = "/tmp/node_exporter"
 
-DEFAULT_VERSION = "1.10.2"
-DEFAULT_SYSTEM_USER = "node_exporter"
-DEFAULT_SYSTEM_GROUP = "node_exporter"
-DEFAULT_SERVICE_ARGS = {
-    "collector.interrupts": None,
-    "collector.processes": None,
-    "collector.systemd": None,
-    "no-collector.fibrechannel": None,
-    "no-collector.infiniband": None,
-    "no-collector.hwmon": None,
-    "no-collector.nfs": None,
-    "no-collector.nfsd": None,
-    "no-collector.textfile": None,
-    "no-collector.zfs": None,
-    "web.listen-address": "127.0.0.1:9100",
-}
+DEFAULT_VERSION: Final[str] = "1.12.1"
+DEFAULT_SYSTEM_USER: Final[str] = "node_exporter"
+DEFAULT_SYSTEM_GROUP: Final[str] = "node_exporter"
+DEFAULT_SERVICE_ARGS = MappingProxyType(
+    {
+        "collector.interrupts": None,
+        "collector.processes": None,
+        "collector.systemd": None,
+        "no-collector.fibrechannel": None,
+        "no-collector.infiniband": None,
+        "no-collector.hwmon": None,
+        "no-collector.nfs": None,
+        "no-collector.nfsd": None,
+        "no-collector.textfile": None,
+        "no-collector.zfs": None,
+        "web.listen-address": "127.0.0.1:9100",
+    }
+)
 
-_TEMPLATE = (
+_TEMPLATE: Final[Traversable] = (
     resources.files("pyinfra_node_exporter") / "templates" / "node_exporter.service.j2"
 )
 

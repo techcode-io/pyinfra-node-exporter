@@ -33,6 +33,7 @@ dev = [
     "pre-commit>=4.6.0", # MIT
     "pytest>=9.1.1", # MIT
     "ruff>=0.15.21", # MIT
+    "urllib3>=2.6.0", # MIT
 ]
 
 [tool.poe.tasks."env:configure"]
@@ -53,3 +54,7 @@ sequence = [
 [tool.poe.tasks.test]
 help = "Run all tests."
 cmd = "pytest tests"
+
+[tool.poe.tasks."project:upgrade"]
+help = "Bump DEFAULT_VERSION to the latest upstream node_exporter release."
+script = "scripts.project:upgrade"
