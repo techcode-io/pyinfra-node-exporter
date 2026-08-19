@@ -1,0 +1,14 @@
+*.egg-info
+*.pyc
+__pycache__
+.vscode
+.venv
+build
+dist
+.idea
+.tox
+.pytest_cache
+.ruff_cache
+.DS_Store
+pyrightconfig.json
+pyinfra-debug.log

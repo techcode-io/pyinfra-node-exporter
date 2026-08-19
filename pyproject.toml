@@ -1,0 +1,55 @@
+[project]
+name = "pyinfra-node-exporter"
+version = "0.1.0"
+description = "Install and uninstall Prometheus node_exporter with pyinfra."
+authors = [
+    { name = "Adrien Mannocci", email = "adrien.mannocci@gmail.com" }
+]
+license = { text = "Apache-2.0" }
+readme = "README.md"
+classifiers = [
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "Programming Language :: Python :: 3.12",
+]
+requires-python = ">=3.12,<3.14"
+dependencies = [
+    "pyinfra>=3", # MIT
+]
+
+[project.urls]
+Repository = "https://github.com/techcode-io/pyinfra-node-exporter"
+Documentation = "https://github.com/techcode-io/pyinfra-node-exporter"
+Changelog = "https://github.com/techcode-io/pyinfra-node-exporter/CHANGELOG.md"
+Tracker = "https://github.com/techcode-io/pyinfra-node-exporter/issues"
+
+[build-system]
+requires = ["uv_build>=0.11.28,<0.12.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "poethepoet>=0.48.0", # MIT
+    "pre-commit>=4.6.0", # MIT
+    "pytest>=9.1.1", # MIT
+    "ruff>=0.15.21", # MIT
+]
+
+[tool.poe.tasks."env:configure"]
+help = "Setup project environment."
+cmd = "pre-commit install"
+
+[tool.poe.tasks.lint]
+help = "Lint code project."
+cmd = "ruff check src"
+
+[tool.poe.tasks.fmt]
+help = "Format code project."
+sequence = [
+    { cmd = "ruff check --select I --fix" },
+    { cmd = "ruff format" },
+]
+
+[tool.poe.tasks.test]
+help = "Run all tests."
+cmd = "pytest tests"

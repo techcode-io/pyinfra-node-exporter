@@ -1,0 +1,24 @@
+[Unit]
+Description=Description=Node Exporter service
+After=network.target
+
+[Service]
+Type=simple
+User={{ node_exporter_system_user }}
+Group={{ node_exporter_system_group }}
+ExecStart=/usr/local/bin/node_exporter {% for flag, flag_value in node_exporter_service_args.items() %}--{{ flag }}{% if flag_value is not none %}={{ flag_value }}{% endif %} {% endfor %}
+
+SyslogIdentifier=node_exporter
+Restart=always
+
+PrivateTmp=yes
+ProtectHome=yes
+NoNewPrivileges=yes
+
+ProtectSystem=full
+ProtectControlGroups=true
+ProtectKernelModules=true
+ProtectKernelTunables=yes
+
+[Install]
+WantedBy=multi-user.target
