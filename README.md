@@ -90,17 +90,18 @@ uv run poe test
 
 - `install()` and `uninstall()` are [pyinfra](https://pyinfra.com) deploy functions, wrapped with `@deploy(...)`.
 - They take explicit keyword arguments instead of reading `host.data`, so any inventory can use them.
-- `install()` creates the system user/group, downloads the `node_exporter` release binary, renders the systemd unit
-  from a bundled template, then enables and starts the service.
-- Before downloading, it checks the currently installed version using a pyinfra fact and skips the download entirely
-  if it already matches.
+- `install()` creates the system user/group, downloads the `node_exporter` release binary, renders the systemd unit from
+  a bundled template, then enables and starts the service.
+- Before downloading, it checks the currently installed version using a pyinfra fact and skips the download entirely if
+  it already matches.
 - `uninstall()` stops and disables the service, then removes the unit file, binary, user and group.
 
 ### How to install node_exporter
 
 - This project isn't published to PyPI yet, so add it as a git dependency pinned to a commit.
-- Find the commit you want to pin to on the [commit history](https://github.com/techcode-io/pyinfra-node-exporter/commits/main),
-  then add it to your pyinfra project.
+- Find the commit you want to pin to on
+  the [commit history](https://github.com/techcode-io/pyinfra-node-exporter/commits/main), then add it to your pyinfra
+  project.
 
 ```bash
 uv add git+https://github.com/techcode-io/pyinfra-node-exporter --rev <commit-sha>
@@ -144,7 +145,7 @@ uninstall()
 from pyinfra_node_exporter import DEFAULT_SERVICE_ARGS, install
 
 install(
-    version="1.10.2",
+    version="1.12.1",
     system_user="node_exporter",
     system_group="node_exporter",
     service_args={
@@ -154,12 +155,12 @@ install(
 )
 ```
 
-| Function                | Parameter       | Default                | Description                                                                    |
-|-------------------------|-----------------|-------------------------|----------------------------------------------------------------------------------|
-| `install`, `uninstall`  | `system_user`   | `node_exporter`         | System user running the service                                                |
-| `install`, `uninstall`  | `system_group`  | `node_exporter`         | System group running the service                                               |
-| `install`               | `version`       | `1.10.2`                | node_exporter release version to download                                      |
-| `install`               | `service_args`  | `DEFAULT_SERVICE_ARGS`  | Dict of `--flag: value` (or `None` for a bare flag) passed to `node_exporter`  |
+| Function               | Parameter      | Default                | Description                                                                   |
+|------------------------|----------------|------------------------|-------------------------------------------------------------------------------|
+| `install`, `uninstall` | `system_user`  | `node_exporter`        | System user running the service                                               |
+| `install`, `uninstall` | `system_group` | `node_exporter`        | System group running the service                                              |
+| `install`              | `version`      | `1.12.1`               | node_exporter release version to download                                     |
+| `install`              | `service_args` | `DEFAULT_SERVICE_ARGS` | Dict of `--flag: value` (or `None` for a bare flag) passed to `node_exporter` |
 
 ## :heart: Contributing
 
@@ -168,7 +169,8 @@ notifications about new versions, and give it a :star2: **GitHub Star**!
 
 You can also contribute by:
 
-- Sending a [Pull Request](https://github.com/techcode-io/pyinfra-node-exporter/pulls) with your awesome new features and bug fixed.
+- Sending a [Pull Request](https://github.com/techcode-io/pyinfra-node-exporter/pulls) with your awesome new features
+  and bug fixed.
 - Be part of the community and help resolve [Issues](https://github.com/techcode-io/pyinfra-node-exporter/issues).
 
 ## 🧾 License
