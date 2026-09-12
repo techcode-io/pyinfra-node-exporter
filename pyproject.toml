@@ -58,3 +58,7 @@ cmd = "pytest tests"
 [tool.poe.tasks."project:upgrade"]
 help = "Bump DEFAULT_VERSION to the latest upstream node_exporter release."
 script = "scripts.project:upgrade"
+
+[tool.poe.tasks."project:upgrade_ci"]
+help = "Like project:upgrade, but also writes the diff as GitHub Actions step outputs (used by Dependabot++)."
+script = "scripts.project:upgrade_ci"
